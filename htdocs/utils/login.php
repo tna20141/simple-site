@@ -80,15 +80,16 @@ function validate(&$username, &$password) {
 
 function authenticate($username, $password) {
 	$conn = db_connect();
-	$sql = "select * from " . TBL_USERS . " where username = '$username' and password = '$password'";
-	$rows = $conn->query($sql);
-	$counter = 0;
-	foreach($rows as $row) {
-		$counter++;
-	}
-	if ($counter == 1)
+	$sql = "select count(*) from " . TBL_USERS . " where username = :username and password = :password";
+	$st = $conn->prepare($sql);
+	$st->execute(array(':username' => $username, ':password' => $password));
+	$data = $st->fetch(PDO::FETCH_NUM);
+	$count = $data[0];
+
+	if ($count == 1)
 		return true;
 	else
 		return false;
 }
 ?>
+	

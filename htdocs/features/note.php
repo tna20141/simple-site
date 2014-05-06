@@ -83,22 +83,25 @@ function display($notes) {
 function add_note_to_db($content) {
 	$conn = db_connect();
 	$date = date("Y-m-d H:i:s");
-	$sql = "INSERT INTO " . TBL_NOTES . " (content, created_time) VALUES ('$content', '$date')";
-	$conn->query($sql);
+	$sql = "INSERT INTO " . TBL_NOTES . " (content, created_time) VALUES (:content, :date)";
+	$st = $conn->prepare($sql);
+	$st->execute(array(':content' => $content, ':date' => $date));
 	$last_id = $conn->lastInsertId();
 	return $last_id;
 }
 
 function delete_note($note_id) {
 	$conn = db_connect();
-	$sql = "DELETE FROM " . TBL_NOTES . " WHERE id = $note_id";
-	$conn->query($sql);
+	$sql = "DELETE FROM " . TBL_NOTES . " WHERE id = :id";
+	$st = $conn->prepare($sql);
+	$st->execute(array(':id' => $note_id));
 }
 
 function edit_note($note_id, $content) {
 	$conn = db_connect();
-	$sql = "UPDATE " . TBL_NOTES . " SET content = '$content' WHERE id = $note_id";
-	$conn->query($sql);
+	$sql = "UPDATE " . TBL_NOTES . " SET content = :content WHERE id = :id";
+	$st = $conn->prepare($sql);
+	$st->execute(array(':content' => $content, ':id' => $note_id));
 }
 
 function script() {

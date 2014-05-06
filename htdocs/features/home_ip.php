@@ -1,14 +1,10 @@
 <?php
-require_once($_SERVER["DOCUMENT_ROOT"] . "/config/common_macros.php");
 require_once($_SERVER["DOCUMENT_ROOT"] . "/utils/utils.php");
-require_once($_SERVER["DOCUMENT_ROOT"] . "/utils/db.php");
- 
 checkLogin();
 
-$ip = "118.71.3.12";
+$ip = file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/config/home_ip.txt");
 
-echo "$ip";
+if ($ip !== false) echo $ip;
 
 commonLinks();
-
 ?>

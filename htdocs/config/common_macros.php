@@ -4,16 +4,13 @@
 define("EMPTY_HASH", "d41d8cd98f00b204e9800998ecf8427e");
 
 //database parameters
-define("DB_DSN", "mysql:host=sql310.byethost11.com;dbname=b11_12179913_basic_page");
-define("DB_USERNAME", "b11_12179913");
-define("DB_PASSWORD", "password");
+define("DB_DSN", "mysql:host=sql202.byethost33.com;dbname=b33_14159311_basic_page");
+define("DB_USERNAME", "b33_14159311");
+define("DB_PASSWORD", "m24xmcgr9r");
 define("TBL_USERS", "users");
 define("TBL_NOTES", "notes");
 
 //session timeout
 define("SESSION_TIMEOUT", 1800);
-
-//directories
-define("UPLOAD_DIR", $_SERVER["DOCUMENT_ROOT"] . "/upload/");
 
 ?>
